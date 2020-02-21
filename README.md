@@ -1,5 +1,7 @@
-Changes to convert from SQLSERVER to MySQL Syntax
-**************************************************
+
+# Conversion from Oracle to MySQL syntax #
+
+## Changes to convert from SQLSERVER to MySQL Syntax ##
 
 1. Replace Number with INT. Remove number size requirement
 2. Replace VARCHAR2 with VARCHAR
@@ -10,9 +12,9 @@ Changes to convert from SQLSERVER to MySQL Syntax
  -- also remove AM/PM and replace with appropriate military time value
 
 
-Replacement Pattern using sed:
-******************************
+## Replacement Pattern using sed ##
 
+```
 cat cis_037_mysql_extra_tables.sql \
     | gsed  's|\(.[0-9]*-\w*-[0-9]*.\)|str_to_date('\\1',\x27%d-%M-%Y\x27)|g' \
     | gsed 's|NUMBER(\w.\w*)|INT|g' | gsed 's|NUMBER(\w*)|INT|g'  \
@@ -20,9 +22,12 @@ cat cis_037_mysql_extra_tables.sql \
     | gsed 's|INT;|INT);|g' \
     |  egrep -v '(^CREATE SEQUENCE|^START WITH|^INCREMENT BY)' \
      > temp.sql
+```
 
-Replacment Pattern for converting NUMBER to INT
-***********************************************
+## Replacment Pattern for converting NUMBER to INT ##
 
+```
 echo "(MIN_PRICE    NUMBER(2,0)," | gsed 's|NUMBER(\w,\w*)|INT|g'
 echo "(SEQUENCE_NUMBER    NUMBER(5)," | gsed 's|NUMBER(\w*)|INT|g'
+
+```
