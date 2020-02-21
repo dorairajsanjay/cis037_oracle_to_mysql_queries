@@ -1,5 +1,8 @@
 
 # Conversion from Oracle to MySQL syntax #
+For queries in SQL Fundamentals Version 3 by John Patrick
+
+Note that the last section in Chapter 18 has not been transformed due to missing tables. 
 
 ## Changes to convert from SQLSERVER to MySQL Syntax ##
 
